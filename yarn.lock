@@ -63,6 +63,11 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/scrollbooster@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@types/scrollbooster/-/scrollbooster-2.2.0.tgz#693b4d28b8e5c39f7c3b6d47c36b831845e67614"
+  integrity sha512-iBGrekrufKgkBO2c0hoFbkJ0tFPHXrejC9SSsqG7zIPZzmn9qAG8b5zrlT/Oc9ooHz45g3CRna7/9sMP4wClIA==
+
 "@typescript-eslint/eslint-plugin@^2.10.0":
   version "2.20.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-2.20.0.tgz#a522d0e1e4898f7c9c6a8e1ed3579b60867693fa"

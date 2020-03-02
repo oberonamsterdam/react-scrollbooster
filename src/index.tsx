@@ -1,14 +1,15 @@
-import ScrollBooster, { ScrollBoosterOptions, ScrollingState } from 'scrollbooster';
 import React, { useCallback, useRef, useState, MutableRefObject, ReactNode } from 'react';
+import ScrollBooster, { ScrollBoosterOptions, ScrollingState } from 'scrollbooster';
 
-interface ScrollBoostOptions<T> extends Omit<ScrollBoosterOptions, 'viewport' | 'onUpdate' | 'content'> {
+interface ScrollBoostOptions<T extends HTMLElement>
+    extends Omit<ScrollBoosterOptions, 'viewport' | 'onUpdate' | 'content'> {
     onUpdate?: (state: ScrollingState, node: T) => void;
 }
 
-interface ScrollBoostProps<T> {
+interface ScrollBoostProps<T extends HTMLElement> {
     viewport: (node: T | null) => void;
     content: MutableRefObject<T | null>;
-    instance: ScrollBooster | null;
+    scrollbooster: ScrollBooster | null;
 }
 
 /**
@@ -41,13 +42,14 @@ const useScrollBoost = <T extends HTMLElement>(options: ScrollBoostOptions<T> = 
     return [viewport, content, scrollBooster] as const;
 };
 
-interface ScrollBoostConfig<T> extends Omit<ScrollBoostOptions<T>, 'viewport' | 'onUpdate' | 'content'> {
+interface ScrollBoostConfig<T extends HTMLElement>
+    extends Omit<ScrollBoostOptions<T>, 'viewport' | 'onUpdate' | 'content'> {
     children: (props: ScrollBoostProps<T>) => ReactNode;
 }
 
 function ScrollBoost<T extends HTMLElement>({ children, ...options }: ScrollBoostConfig<T>) {
     const [viewport, content, instance] = useScrollBoost<T>(options);
-    return <>{children({ viewport, content, instance })}</>;
+    return <>{children({ viewport, content, scrollbooster: instance })}</>;
 }
 
 export { useScrollBoost, ScrollBoost, ScrollBoostOptions };

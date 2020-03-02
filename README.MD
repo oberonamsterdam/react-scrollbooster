@@ -95,6 +95,7 @@ export default Component
 ## TODO:
 
 - [ ] write out readme more
+- [ ] add documentation with JSDoc
 - [ ] add codesandbox examples (basic, react-window)
 - [ ] add tests with RTL?
 - [ ] implement types from [`@types/scrollbooster`](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/42745) (opened PR)
