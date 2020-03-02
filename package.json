@@ -1,0 +1,49 @@
+{
+    "name": "react-scrollbooster",
+    "version": "0.0.1",
+    "publishConfig": {
+        "access": "public"
+    },
+    "description": "A react library that utilizes ScrollBooster in order to create drag-to-scroll components",
+    "main": "./lib/index.js",
+    "types": "./lib/index.d.ts",
+    "author": "Chris Neven",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/oberonamsterdam/react-scrollbooster"
+    },
+    "license": "MIT",
+    "keywords": [
+        "react",
+        "scrollbooster",
+        "dragging",
+        "scrolling",
+        "TypeScript support",
+        "oberon"
+    ],
+    "scripts": {
+        "build": "npm run build:clean && npm run build:lib",
+        "build:clean": "rimraf lib/",
+        "build:lib": "tsc",
+        "build:check": "tsc --noEmit"
+    },
+    "dependencies": {
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "scrollbooster": "^2.2.1"
+    },
+    "PeerDependencies": {
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0"
+    },
+    "devDependencies": {
+        "@types/react": "^16.9.23",
+        "@types/react-dom": "^16.9.5",
+        "copyfiles": "^2.2.0",
+        "eslint": "^6.8.0",
+        "eslint-config-oberon": "^2.0.0",
+        "oberon-prettier-config": "^1.0.0",
+        "prettier": "^1.19.1",
+        "typescript": "^3.8.3"
+    }
+}
