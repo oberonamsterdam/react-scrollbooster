@@ -1,5 +1,7 @@
 # react-scrollbooster
 
+[![npm version](https://badge.fury.io/js/react-scrollbooster.svg)](https://badge.fury.io/js/react-scrollbooster)
+
 ## Features
 
 - 🎣 **Hooks or Component API**
