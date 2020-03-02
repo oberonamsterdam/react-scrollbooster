@@ -48,8 +48,8 @@ interface ScrollBoostConfig<T extends HTMLElement>
 }
 
 function ScrollBoost<T extends HTMLElement>({ children, ...options }: ScrollBoostConfig<T>) {
-    const [viewport, content, instance] = useScrollBoost<T>(options);
-    return <>{children({ viewport, content, scrollbooster: instance })}</>;
+    const [viewport, content, scrollbooster] = useScrollBoost<T>(options);
+    return <>{children({ viewport, content, scrollbooster })}</>;
 }
 
 export { useScrollBoost, ScrollBoost, ScrollBoostOptions };
