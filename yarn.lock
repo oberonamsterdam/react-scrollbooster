@@ -458,10 +458,10 @@ eslint-config-airbnb@^18.0.1:
     object.assign "^4.1.0"
     object.entries "^1.1.0"
 
-eslint-config-oberon@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-oberon/-/eslint-config-oberon-2.0.0.tgz#5b3b9471c04dda5e5e8c28ddd23151f1b1e30b9c"
-  integrity sha512-KZkj/JSPDsTy2z4dIruOa38smsjoUGYg07GIHYy8QqG/X7enVkbOUfhu5VfGkUaiJr1+wgg/8GZAz0ePvAI63Q==
+eslint-config-oberon@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-oberon/-/eslint-config-oberon-2.0.1.tgz#a57ef1df7e92eed6e549e993dc4c3466a8cbef63"
+  integrity sha512-ret8bfz4a7Ltzf8x5CthuyAqFI20F5c9XHHWVZ2bjMHy/RF2zTZscSCqK9DInT4N74oHoA4W4SNA38RCZzXglA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^2.10.0"
     "@typescript-eslint/parser" "^2.10.0"
@@ -1472,10 +1472,10 @@ scheduler@^0.18.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
-scrollbooster@^2.2.1:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/scrollbooster/-/scrollbooster-2.2.2.tgz#13e449d44848461a3e4262101bdd164e5bb08d37"
-  integrity sha512-vRUCzHvqzQjfoL5EQAQofBfmi8TkKNQ3Q0lsuULA2/RwHwv5nOX//BpO+Y6f7ynv3ndChYwNqFF10BR2TBttZg==
+scrollbooster@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/scrollbooster/-/scrollbooster-2.2.1.tgz#4e34ebcf592e849d40d8f4b85877dd2c77d16dc1"
+  integrity sha512-D7lLn8O83V+yxTTCODUWKKVNvDf554DDS5k0my+1iDAJN8WBl/lF+UNB1tqhhQJF1bsfLgALuglmkWZzPLq8kw==
 
 "semver@2 || 3 || 4 || 5", semver@^5.5.0:
   version "5.7.1"

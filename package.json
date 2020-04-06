@@ -1,6 +1,6 @@
 {
     "name": "react-scrollbooster",
-    "version": "0.0.6",
+    "version": "0.1.0",
     "publishConfig": {
         "access": "public"
     },
@@ -42,9 +42,9 @@
         "@types/react-dom": "^16.9.5",
         "copyfiles": "^2.2.0",
         "eslint": "^6.8.0",
-        "eslint-config-oberon": "^2.0.0",
+        "eslint-config-oberon": "^2.0.1",
         "oberon-prettier-config": "^1.0.0",
-        "prettier": "^1.19.1",
+        "prettier": "^2.0.3",
         "typescript": "^3.8.3"
     }
 }

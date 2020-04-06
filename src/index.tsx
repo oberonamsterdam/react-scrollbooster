@@ -1,55 +1,51 @@
-import React, { useCallback, useRef, useState, MutableRefObject, ReactNode } from 'react';
-import ScrollBooster, { ScrollBoosterOptions, ScrollingState } from 'scrollbooster';
+import React, { ReactNode, RefObject, useCallback, useRef, useEffect } from 'react';
+import ScrollBooster, { ScrollBoosterOptions } from 'scrollbooster';
 
-interface ScrollBoostOptions<T extends HTMLElement>
-    extends Omit<ScrollBoosterOptions, 'viewport' | 'onUpdate' | 'content'> {
-    onUpdate?: (state: ScrollingState, node: T) => void;
+interface ScrollBoostOptions extends Omit<ScrollBoosterOptions, 'viewport' | 'content'> {
+    content?: RefObject<HTMLElement>;
 }
 
-interface ScrollBoostProps<T extends HTMLElement> {
-    viewport: (node: T | null) => void;
-    content: MutableRefObject<T | null>;
-    scrollbooster: ScrollBooster | null;
+interface ScrollBoostProps {
+    viewport: (node: HTMLElement | null) => void;
+    scrollbooster: ScrollBooster | null | undefined;
 }
 
 /**
- * Returns ref values for the viewport, the content and the scrollbooster instance
+ * Returns ref values for the viewport and the scrollbooster instance
  */
-const useScrollBoost = <T extends HTMLElement>(options: ScrollBoostOptions<T> = {}) => {
-    const content = useRef<T | null>(null);
-    const [scrollBooster, setScrollBooster] = useState<ScrollBooster | null>(null);
-    const viewport = useCallback(
-        (node: T | null) => {
-            if (scrollBooster) {
-                // clear the scrollbooster eventListeners.
-                scrollBooster.destroy();
-            }
-            if (node && !scrollBooster) {
-                const { onUpdate, ...rest } = options;
-                setScrollBooster(
-                    new ScrollBooster({
-                        viewport: node,
-                        content: content.current ?? node,
-                        onUpdate: state => onUpdate?.(state, node),
-                        ...rest,
-                    })
-                );
-            }
-        },
-        [scrollBooster, options]
-    );
+const useScrollBoost = <T extends HTMLElement>(options: ScrollBoostOptions = {}) => {
+    const scrollBooster = useRef<ScrollBooster | null>();
+    // options shouldn't change within the hook but can be changed on the scrollBooster instance
+    const optionsRef = useRef(options);
+    const viewport = useCallback((node: T | null) => {
+        if (node) {
+            const { content, ...rest } = optionsRef.current;
+            const sbOptions: ScrollBoosterOptions = { viewport: node, ...rest };
 
-    return [viewport, content, scrollBooster] as const;
+            if (content?.current) {
+                sbOptions.content = content.current;
+            }
+
+            // create the scrollbooster instance
+            scrollBooster.current = new ScrollBooster(sbOptions);
+        }
+    }, []);
+
+    useEffect(() => {
+        // clear the scrollbooster eventlisteners
+        return () => scrollBooster.current?.destroy();
+    }, []);
+
+    return [viewport, scrollBooster.current] as const;
 };
 
-interface ScrollBoostConfig<T extends HTMLElement>
-    extends Omit<ScrollBoostOptions<T>, 'viewport' | 'onUpdate' | 'content'> {
-    children: (props: ScrollBoostProps<T>) => ReactNode;
+interface ScrollBoostConfig extends Omit<ScrollBoostOptions, 'viewport' | 'onUpdate' | 'content'> {
+    children: (props: ScrollBoostProps) => ReactNode;
 }
 
-function ScrollBoost<T extends HTMLElement>({ children, ...options }: ScrollBoostConfig<T>) {
-    const [viewport, content, scrollbooster] = useScrollBoost<T>(options);
-    return <>{children({ viewport, content, scrollbooster })}</>;
+function ScrollBoost({ children, ...options }: ScrollBoostConfig) {
+    const [viewport, scrollbooster] = useScrollBoost(options);
+    return <>{children({ viewport, scrollbooster })}</>;
 }
 
-export { useScrollBoost, ScrollBoost, ScrollBoostOptions };
+export { useScrollBoost, ScrollBoost };
