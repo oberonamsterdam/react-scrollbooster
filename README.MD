@@ -27,7 +27,7 @@ npm install react-scrollbooster --save
 #### `useScrollBoost`
 
 ```js
-const [viewport, content, scrollbooster] = useScrollBoost(options)
+const [viewport, scrollbooster] = useScrollBoost(options)
 ```
 
 Call the `useScrollBoost` hook with the (optional)
