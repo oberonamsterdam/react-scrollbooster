@@ -27,7 +27,7 @@ const Template: Story = () => {
         direction: 'horizontal',
         friction: 0.1,
         scrollMode: 'native',
-        onUpdate: (sbState) => {
+        onUpdate: sbState => {
             setState(sbState);
         },
     });
