@@ -1,5 +1,18 @@
 {
     "extends": [
         "oberon"
-    ]
+    ],
+    "rules": {
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": [
+                    ".storybook/**",
+                    "stories/**",
+                    "example/**",
+                    "test/**"
+                ]
+            }
+        ]
+    }
 }

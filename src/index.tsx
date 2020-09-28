@@ -1,11 +1,11 @@
 import React, { ReactNode, RefObject, useCallback, useRef, useEffect } from 'react';
 import ScrollBooster, { ScrollBoosterOptions } from 'scrollbooster';
 
-interface ScrollBoostOptions extends Omit<ScrollBoosterOptions, 'viewport' | 'content'> {
+export interface ScrollBoostOptions extends Omit<ScrollBoosterOptions, 'viewport' | 'content'> {
     content?: RefObject<HTMLElement>;
 }
 
-interface ScrollBoostProps {
+export interface ScrollBoostProps {
     viewport: (node: HTMLElement | null) => void;
     scrollbooster: ScrollBooster | null | undefined;
 }
@@ -39,7 +39,7 @@ const useScrollBoost = <T extends HTMLElement>(options: ScrollBoostOptions = {})
     return [viewport, scrollBooster.current] as const;
 };
 
-interface ScrollBoostConfig extends Omit<ScrollBoostOptions, 'viewport' | 'onUpdate' | 'content'> {
+export interface ScrollBoostConfig extends Omit<ScrollBoostOptions, 'viewport' | 'onUpdate' | 'content'> {
     children: (props: ScrollBoostProps) => ReactNode;
 }
 
