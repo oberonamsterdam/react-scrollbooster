@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, useCallback, useRef, useEffect } from 'react';
+import React, { ReactNode, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import ScrollBooster, { ScrollBoosterOptions } from 'scrollbooster';
 
 export interface ScrollBoostOptions extends Omit<ScrollBoosterOptions, 'viewport' | 'content'> {
@@ -7,14 +7,16 @@ export interface ScrollBoostOptions extends Omit<ScrollBoosterOptions, 'viewport
 
 export interface ScrollBoostProps {
     viewport: (node: HTMLElement | null) => void;
-    scrollbooster: ScrollBooster | null | undefined;
+    scrollbooster: ScrollBooster | null;
 }
 
 /**
  * Returns ref values for the viewport and the scrollbooster instance
  */
 const useScrollBoost = <T extends HTMLElement>(options: ScrollBoostOptions = {}) => {
-    const scrollBooster = useRef<ScrollBooster | null>();
+    const scrollBooster = useRef<ScrollBooster | null>(null);
+    const [scrollBoosterState, setScrollBoosterState] = useState(scrollBooster.current);
+
     // options shouldn't change within the hook but can be changed on the scrollBooster instance
     const optionsRef = useRef(options);
     const viewport = useCallback((node: T | null) => {
@@ -28,6 +30,7 @@ const useScrollBoost = <T extends HTMLElement>(options: ScrollBoostOptions = {})
 
             // create the scrollbooster instance
             scrollBooster.current = new ScrollBooster(sbOptions);
+            setScrollBoosterState(scrollBooster.current);
         }
     }, []);
 
@@ -36,7 +39,7 @@ const useScrollBoost = <T extends HTMLElement>(options: ScrollBoostOptions = {})
         return () => scrollBooster.current?.destroy();
     }, []);
 
-    return [viewport, scrollBooster.current] as const;
+    return [viewport, scrollBoosterState] as const;
 };
 
 export interface ScrollBoostConfig extends Omit<ScrollBoostOptions, 'viewport' | 'onUpdate' | 'content'> {

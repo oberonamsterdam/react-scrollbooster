@@ -15,6 +15,7 @@
     "engines": {
         "node": ">=10"
     },
+    "prettier": "oberon-prettier-config",
     "scripts": {
         "start": "tsdx watch",
         "build": "tsdx build",
