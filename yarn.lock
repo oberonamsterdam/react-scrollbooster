@@ -11590,10 +11590,10 @@ schema-utils@^2.6.5, schema-utils@^2.6.6, schema-utils@^2.7.0, schema-utils@^2.7
     ajv "^6.12.4"
     ajv-keywords "^3.5.2"
 
-scrollbooster@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/scrollbooster/-/scrollbooster-2.2.1.tgz#4e34ebcf592e849d40d8f4b85877dd2c77d16dc1"
-  integrity sha512-D7lLn8O83V+yxTTCODUWKKVNvDf554DDS5k0my+1iDAJN8WBl/lF+UNB1tqhhQJF1bsfLgALuglmkWZzPLq8kw==
+scrollbooster@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/scrollbooster/-/scrollbooster-3.0.2.tgz#c1f0da4322321a165c70751b51e13f62177f26be"
+  integrity sha512-WZjvtSxCgCEbfc+9DmxfhuK6ACOqQr3jymniIp4I9Hh0mIEK1CKS4t+d7iPdeuILP5Q/we13h4YUHD0o+gPiRg==
 
 select@^1.1.2:
   version "1.1.2"

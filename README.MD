@@ -5,6 +5,7 @@
 ## Features
 
 - 🎣 **Hooks or Component API**
+- TypeScript support
 
 ## Installation
 

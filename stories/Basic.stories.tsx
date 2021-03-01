@@ -2,10 +2,10 @@ import { useState } from '@storybook/addons';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { ScrollingState } from 'scrollbooster';
-import { useScrollBoost } from '../src';
+import { useScrollBoost } from '../src/index';
 
 const meta: Meta = {
-    title: 'Welcome',
+    title: 'Basics',
     argTypes: {
         children: {
             control: {

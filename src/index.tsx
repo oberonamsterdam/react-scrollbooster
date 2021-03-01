@@ -1,8 +1,11 @@
-import React, { ReactNode, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, { MutableRefObject, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import ScrollBooster, { ScrollBoosterOptions } from 'scrollbooster';
 
 export interface ScrollBoostOptions extends Omit<ScrollBoosterOptions, 'viewport' | 'content'> {
-    content?: RefObject<HTMLElement>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    contentRef?: MutableRefObject<any>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    viewportRef?: MutableRefObject<any>;
 }
 
 export interface ScrollBoostProps {
@@ -19,20 +22,41 @@ const useScrollBoost = <T extends HTMLElement>(options: ScrollBoostOptions = {})
 
     // options shouldn't change within the hook but can be changed on the scrollBooster instance
     const optionsRef = useRef(options);
-    const viewport = useCallback((node: T | null) => {
-        if (node) {
-            const { content, ...rest } = optionsRef.current;
-            const sbOptions: ScrollBoosterOptions = { viewport: node, ...rest };
 
-            if (content?.current) {
-                sbOptions.content = content.current;
-            }
+    const initScrollBoost = useCallback(<T extends HTMLElement>(node: T | null) => {
+        const { contentRef, viewportRef, ...rest } = optionsRef.current;
+        const sbOptions: ScrollBoosterOptions = { viewport: node, ...rest };
 
-            // create the scrollbooster instance
-            scrollBooster.current = new ScrollBooster(sbOptions);
-            setScrollBoosterState(scrollBooster.current);
+        sbOptions.viewport = node;
+
+        if (contentRef?.current) {
+            sbOptions.content = contentRef.current;
         }
+
+        // create the scrollbooster instance
+        scrollBooster.current = new ScrollBooster(sbOptions);
+        setScrollBoosterState(scrollBooster.current);
     }, []);
+
+    const viewport = useCallback(
+        (node: T | null) => {
+            if (node) {
+                if (options.viewportRef) {
+                    // eslint-disable-next-line no-param-reassign
+                    options.viewportRef.current = node;
+                    return;
+                }
+                initScrollBoost(node);
+            }
+        },
+        [initScrollBoost, options.viewportRef]
+    );
+
+    useEffect(() => {
+        if (options.viewportRef?.current) {
+            initScrollBoost(options.viewportRef.current);
+        }
+    }, [initScrollBoost, options.viewportRef]);
 
     useEffect(() => {
         // clear the scrollbooster eventlisteners
